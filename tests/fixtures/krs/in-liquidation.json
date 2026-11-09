@@ -1,0 +1,350 @@
+{
+  "odpis": {
+    "rodzaj": "Aktualny",
+    "naglowekA": {
+      "rejestr": "RejP",
+      "numerKRS": "0000558545",
+      "dataCzasOdpisu": "09.11.2026 16:52:03",
+      "stanZDnia": "27.07.2026",
+      "dataRejestracjiWKRS": "15.05.2015",
+      "numerOstatniegoWpisu": 39,
+      "dataOstatniegoWpisu": "27.07.2026",
+      "sygnaturaAktSprawyDotyczacejOstatniegoWpisu": "GD.VII NS-REJ.KRS/17972/26/482",
+      "oznaczenieSaduDokonujacegoOstatniegoWpisu": "SĄD REJONOWY GDAŃSK  - PÓŁNOC W GDAŃSKU, VII WYDZIAŁ GOSPODARCZY KRAJOWEGO REJESTRU SĄDOWEGO",
+      "stanPozycji": 1
+    },
+    "dane": {
+      "dzial1": {
+        "danePodmiotu": {
+          "formaPrawna": "SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ",
+          "identyfikatory": {
+            "regon": "36153000800000",
+            "nip": "5922264141"
+          },
+          "nazwa": "TOTAL-HANDEL SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ W LIKWIDACJI",
+          "daneOWczesniejszejRejestracji": {},
+          "czyProwadziDzialalnoscZInnymiPodmiotami": false,
+          "czyPosiadaStatusOPP": false
+        },
+        "siedzibaIAdres": {
+          "siedziba": {
+            "kraj": "POLSKA",
+            "wojewodztwo": "POMORSKIE",
+            "powiat": "STAROGARDZKI",
+            "gmina": "STAROGARD GDAŃSKI",
+            "miejscowosc": "STAROGARD GDAŃSKI"
+          },
+          "adres": {
+            "ulica": "UL. DROGA OWIDZKA",
+            "nrDomu": "1",
+            "miejscowosc": "STAROGARD GDAŃSKI",
+            "kodPocztowy": "83-200",
+            "poczta": "STAROGARD GDAŃSKI",
+            "kraj": "POLSKA"
+          },
+          "adresDoDoreczenElektronicznychWpisanyDoBAE": "AE:PL-71404-48361-VWEAR-27"
+        },
+        "umowaStatut": {
+          "informacjaOZawarciuZmianieUmowyStatutu": [
+            {
+              "zawarcieZmianaUmowyStatutu": "UMOWA SPÓŁKI ZOSTAŁA PODPISANA W DNIU 6 MAJA 2015R. PRZED NOTARIUSZEM PRZEMYSŁAWEM CIECHANOWSKIM, MAJĄCYM KANCELARIĘ NOTARIALNĄ W STAROGARDZIE GDAŃSKIM, UL.KOŚCIUSZKI 35/4, REP. A NR 5253/2015"
+            },
+            {
+              "zawarcieZmianaUmowyStatutu": "AKTEM NOTARIALNYM REPERTORIUM A NR 12672/2015 SPORZĄDZONYM W DNIU 02 LISTOPADA 2015 ROKU PRZEZ NOTARIUSZA PRZEMYSŁAWA CIECHANOWSKIEGO, PROWADZĄCEGO KANCELARIĘ NOTARIALNĄ W STAROGARDZIE GDAŃSKIM PRZY ULICY KOŚCIUSZKI 35/4,ZMIENIONO §6 UMOWY SPÓŁKI."
+            }
+          ]
+        },
+        "pozostaleInformacje": {
+          "czasNaJakiUtworzonyZostalPodmiot": "NIEOZNACZONY",
+          "informacjaOLiczbieUdzialow": "WIĘKSZĄ LICZBĘ UDZIAŁÓW"
+        },
+        "wspolnicySpzoo": [
+          {
+            "nazwisko": {
+              "nazwiskoICzlon": "P******"
+            },
+            "imiona": {
+              "imie": "D*****"
+            },
+            "identyfikator": {
+              "pesel": "6**********"
+            },
+            "posiadaneUdzialy": "515 UDZIAŁÓW O ŁĄCZNEJ WARTOŚCI NOMINALNEJ 515.000,00 ZŁ",
+            "czyPosiadaCaloscUdzialow": false
+          },
+          {
+            "nazwisko": {
+              "nazwiskoICzlon": "M*****"
+            },
+            "imiona": {
+              "imie": "S********",
+              "imieDrugie": "M****"
+            },
+            "identyfikator": {
+              "pesel": "5**********"
+            },
+            "posiadaneUdzialy": "515 UDZIAŁÓW O ŁĄCZNEJ WARTOŚCI NOMINALNEJ 515.000,00 ZŁ",
+            "czyPosiadaCaloscUdzialow": false
+          }
+        ],
+        "kapital": {
+          "wysokoscKapitaluZakladowego": {
+            "wartosc": "1030000,00",
+            "waluta": "PLN"
+          },
+          "wniesioneAporty": {
+            "okreslenieWartosciUdzialowObjetychZaAport": [
+              {
+                "wartosc": "1000000,00",
+                "waluta": "PLN"
+              }
+            ]
+          }
+        }
+      },
+      "dzial2": {},
+      "dzial3": {
+        "przedmiotDzialalnosci": {
+          "przedmiotPrzewazajacejDzialalnosci": [
+            {
+              "opis": "SPRZEDAŻ DETALICZNA NAPOJÓW ALKOHOLOWYCH I BEZALKOHOLOWYCH PROWADZONA W WYSPECJALIZOWANYCH SKLEPACH",
+              "kodDzial": "47",
+              "kodKlasa": "25",
+              "kodPodklasa": "Z"
+            }
+          ],
+          "przedmiotPozostalejDzialalnosci": [
+            {
+              "opis": "DZIAŁALNOŚĆ ZWIĄZANA ZE ZBIERANIEM, PRZETWARZANIEM I UNIESZKODLIWIANIEM ODPADÓW; ODZYSK SUROWCÓW",
+              "kodDzial": "38"
+            },
+            {
+              "opis": "DZIAŁALNOŚĆ ZWIĄZANA Z REKULTYWACJĄ I POZOSTAŁA DZIAŁALNOŚĆ USŁUGOWA ZWIĄZANA Z GOSPODARKĄ ODPADAMI",
+              "kodDzial": "39"
+            },
+            {
+              "opis": "HANDEL HURTOWY I DETALICZNY POJAZDAMI SAMOCHODOWYMI; NAPRAWA POJAZDÓW SAMOCHODOWYCH",
+              "kodDzial": "45"
+            },
+            {
+              "opis": "HANDEL HURTOWY, Z WYŁĄCZENIEM HANDLU POJAZDAMI SAMOCHODOWYMI",
+              "kodDzial": "46"
+            },
+            {
+              "opis": "HANDEL DETALICZNY, Z WYŁĄCZENIEM HANDLU DETALICZNEGO POJAZDAMI SAMOCHODOWYMI",
+              "kodDzial": "47"
+            },
+            {
+              "opis": "TRANSPORT LĄDOWY ORAZ TRANSPORT RUROCIĄGOWY",
+              "kodDzial": "49"
+            },
+            {
+              "opis": "MAGAZYNOWANIE I DZIAŁALNOŚĆ USŁUGOWA WSPOMAGAJĄCA TRANSPORT",
+              "kodDzial": "52"
+            },
+            {
+              "opis": "DZIAŁALNOŚĆ ZWIĄZANA Z OBSŁUGĄ RYNKU NIERUCHOMOŚCI",
+              "kodDzial": "68"
+            },
+            {
+              "opis": "WYNAJEM I DZIERŻAWA",
+              "kodDzial": "77"
+            }
+          ]
+        },
+        "wzmiankiOZlozonychDokumentach": {
+          "wzmiankaOZlozeniuRocznegoSprawozdaniaFinansowego": [
+            {
+              "dataZlozenia": "27.04.2016",
+              "zaOkresOdDo": "OD 01.01.2015 DO 31.12.2015"
+            },
+            {
+              "dataZlozenia": "24.04.2017",
+              "zaOkresOdDo": "OD 01.01.2016 DO 31.12.2016"
+            },
+            {
+              "dataZlozenia": "08.06.2018",
+              "zaOkresOdDo": "OD 01.01.2017 DO 31.12.2017"
+            },
+            {
+              "dataZlozenia": "19.05.2019",
+              "zaOkresOdDo": "OD 01.01.2018 DO 31.12.2018"
+            },
+            {
+              "dataZlozenia": "06.07.2020",
+              "zaOkresOdDo": "OD 01.01.2019 DO 31.12.2019"
+            },
+            {
+              "dataZlozenia": "15.10.2021",
+              "zaOkresOdDo": "OD 01.01.2020 DO 31.12.2020"
+            },
+            {
+              "dataZlozenia": "01.06.2022",
+              "zaOkresOdDo": "OD 01.01.2021 DO 31.12.2021"
+            },
+            {
+              "dataZlozenia": "28.06.2023",
+              "zaOkresOdDo": "OD 01.01.2022 DO 31.12.2022"
+            },
+            {
+              "dataZlozenia": "27.06.2024",
+              "zaOkresOdDo": "OD 01.01.2023 DO 31.12.2023"
+            },
+            {
+              "dataZlozenia": "26.04.2025",
+              "zaOkresOdDo": "OD 01.01.2024 DO 31.12.2024"
+            },
+            {
+              "dataZlozenia": "01.07.2026",
+              "zaOkresOdDo": "OD 01.01.2025 DO 31.12.2025"
+            }
+          ],
+          "wzmiankaOZlozeniuOpiniiBieglegoRewidentaSprawozdaniaZBadania": [
+            {
+              "zaOkresOdDo": "OD 01.01.2015 DO 31.12.2015"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2016 DO 31.12.2016"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2017 DO 31.12.2017"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2018 DO 31.12.2018"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2019 DO 31.12.2019"
+            }
+          ],
+          "wzmiankaOZlozeniuUchwalyPostanowieniaOZatwierdzeniuRocznegoSprawozdaniaFinansowego": [
+            {
+              "zaOkresOdDo": "OD 01.01.2015 DO 31.12.2015"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2016 DO 31.12.2016"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2017 DO 31.12.2017"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2018 DO 31.12.2018"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2019 DO 31.12.2019"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2020 DO 31.12.2020"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2021 DO 31.12.2021"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2022 DO 31.12.2022"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2023 DO 31.12.2023"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2024 DO 31.12.2024"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2025 DO 31.12.2025"
+            }
+          ],
+          "wzmiankaOZlozeniuSprawozdaniaZDzialalnosci": [
+            {
+              "zaOkresOdDo": "OD 01.01.2015 DO 31.12.2015"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2016 DO 31.12.2016"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2017 DO 31.12.2017"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2018 DO 31.12.2018"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2019 DO 31.12.2019"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2020 DO 31.12.2020"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2021 DO 31.12.2021"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2022 DO 31.12.2022"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2023 DO 31.12.2023"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2024 DO 31.12.2024"
+            },
+            {
+              "zaOkresOdDo": "OD 01.01.2025 DO 31.12.2025"
+            }
+          ]
+        },
+        "informacjaODniuKonczacymRokObrotowy": {
+          "dzienKonczacyPierwszyRokObrotowy": "31.12.2015"
+        }
+      },
+      "dzial4": {},
+      "dzial5": {},
+      "dzial6": {
+        "likwidacja": [
+          {
+            "otwarcieLikwidacji": "UCHWAŁĄ  NR 1 NADZWYCZAJNEGO ZGROMADZENIA WSPÓLNIKÓW  Z DNIA 15 LIPCA 2026  ROKU ZGROMADZENIE WSPÓLNIKÓW POSTANOWIŁO ROZWIĄZAĆ TOTAL-HANDEL SPÓŁKĘ Z O.O. I POSTAWIĆ JĄ W STAN LIKWIDACJI. UCHWAŁĄ  NR 2 NADZWYCZAJNEGO ZGROMADZENIA WSPÓLNIKÓW Z DNIA 15 LIPCA 2026  ROKU POWOŁANO STANISŁAWA MARKA MICHNĘ I DANUTĘ POLONIS NA LIKWIDATORÓW SPÓŁKI. PROTOKÓŁ Z ZGROMADZENIA WSPÓLNIKÓW ZOSTAŁ SPORZĄDZONY PRZEZ NOTARIUSZA PRZEMYSŁAWA CIECHANOWSKIEGO , KANCELARIA NOTARIALNA W STAROGARDZIE GDAŃSKIM PRZY ULICY KOŚCIUSZKI 35/4, REPERTORIUM A NUMER 8944 NA ROK 2026 , 15.07.2026",
+            "sposobReprezentacjiPodmiotuPrzezLikwidatorow": "KAŻDY Z LIKWIDATORÓW REPREZENTUJE SPÓŁKĘ SAMODZIELNIE.",
+            "likwidatorzy": [
+              {
+                "nazwisko": {
+                  "nazwiskoICzlon": "P******"
+                },
+                "imiona": {
+                  "imie": "D*****"
+                },
+                "identyfikator": {
+                  "pesel": "6**********"
+                }
+              },
+              {
+                "nazwisko": {
+                  "nazwiskoICzlon": "M*****"
+                },
+                "imiona": {
+                  "imie": "S********",
+                  "imieDrugie": "M****"
+                },
+                "identyfikator": {
+                  "pesel": "5**********"
+                }
+              }
+            ]
+          }
+        ],
+        "rozwiazanieUniewaznienie": {
+          "okreslenieOkolicznosci": "ROZWIĄZANIE",
+          "informacjaORozwiazaniuUniewaznieniu": "UCHWAŁĄ  NR 1 NADZWYCZAJNEGO ZGROMADZENIA WSPÓLNIKÓW  Z DNIA 15 LIPCA 2026  ROKU ZGROMADZENIE WSPÓLNIKÓW POSTANOWIŁO ROZWIĄZAĆ TOTAL-HANDEL SPÓŁKĘ Z O.O. I POSTAWIĆ JĄ W STAN LIKWIDACJI. UCHWAŁĄ  NR 2 NADZWYCZAJNEGO ZGROMADZENIA WSPÓLNIKÓW Z DNIA 15 LIPCA 2026  ROKU POWOŁANO STANISŁAWA MARKA MICHNĘ I DANUTĘ POLONIS NA LIKWIDATORÓW SPÓŁKI. PROTOKÓŁ Z ZGROMADZENIA WSPÓLNIKÓW ZOSTAŁ SPORZĄDZONY PRZEZ NOTARIUSZA PRZEMYSŁAWA CIECHANOWSKIEGO , KANCELARIA NOTARIALNA W STAROGARDZIE GDAŃSKIM PRZY ULICY KOŚCIUSZKI 35/4, REPERTORIUM A NUMER 8944 NA ROK 2026 , 15.07.2026"
+        },
+        "polaczeniePodzialPrzeksztalcenie": [
+          {
+            "okreslenieOkolicznosci": "PRZEJĘCIE INNEJ SPÓŁKI",
+            "opisPolaczeniaPodzialuPrzeksztalcenia": "POŁĄCZENIE POLEGA NA PRZEJĘCIU PRZEZ TOTAL-HANDEL SPÓŁKA Z .O.O.(SPÓŁKA  PRZEJMUJĄCA ) \"TOTAL\" SPÓŁKI Z O.O. (SPÓŁKA PRZEJMOWANA) POPRZEZ PRZENIESIENIE CAŁEGO MAJĄTKU SPÓŁKI PRZEJMOWANEJ NA SPÓŁKĘ PRZEJMUJĄCĄ.\nUCHWAŁA O POŁĄCZENIU W SPÓŁCE PRZEJMUJĄCEJ ZOSTAŁA PODJĘTA W DNIU 2 LISTOPADA 2015 R. PRZEZ  NADZWYCZAJNE ZGROMADZENIE WSPÓLNIKÓW SPÓŁKI TOTAL-HANDEL SPÓŁKA Z .O.O.; ZAWARTA JEST W AKCIE  NOTARIALNYM SPORZĄDZONYM PRZEZ NOTARIUSZA PRZEMYSŁAWA CIECHANOWSKIEGO MAJĄCEGO KANCELARIĘ W STAROGARDZIE GDAŃSKIM PRZY UL.KOŚCIUSZKI 35/4 ZA REPERTORIUM A NUMER 12672/2015.\nUCHWAŁA O POŁĄCZENIU W SPÓŁCE PRZEJMOWANEJ ZOSTAŁA PODJĘTA W DNIU 2 LISTOPADA 2015 R. PRZEZ  NADZWYCZAJNE ZGROMADZENIE WSPÓLNIKÓW SPÓŁKI \"TOTAL\" SPÓŁKA Z .O.O.; ZAWARTA JEST W AKCIE  NOTARIALNYM SPORZĄDZONYM PRZEZ NOTARIUSZA PRZEMYSŁAWA CIECHANOWSKIEGO MAJĄCEGO KANCELARIĘ W STAROGARDZIE GDAŃSKIM PRZY UL.KOŚCIUSZKI 35/4 ZA REPERTORIUM A NUMER 12677/2015.",
+            "podmiotyPrzejmowane": [
+              {
+                "nazwa": "\"TOTAL\" SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ,------",
+                "krajNazwaRejestru": "------,",
+                "identyfikator": {
+                  "regon": "19026458500000"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
