@@ -20,6 +20,13 @@ final class DoctorCommand extends Command
     public function handle(CompanyLookup $lookup): int
     {
         $only = array_values(array_filter((array) $this->option('driver'), 'is_string'));
+        $unknown = array_values(array_diff($only, array_keys($lookup->drivers())));
+        if ($unknown !== []) {
+            $this->error('Unknown driver ['.implode(', ', $unknown).'].');
+
+            return self::INVALID;
+        }
+
         $live = (bool) $this->option('live');
         $rows = [];
         $broken = 0;

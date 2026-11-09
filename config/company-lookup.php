@@ -24,7 +24,8 @@ return [
     |--------------------------------------------------------------------------
     |
     | "first": identifier lookups stop at the first driver that finds the
-    | company (drivers are asked in the order listed under "drivers").
+    | company. Drivers are asked national registers first, then VIES and
+| GLEIF; use CompanyLookup::using() to choose the drivers and their order.
     | "all": every matching driver is asked; LookupOutcome::merged() then
     | combines the records. Name searches always ask every driver.
     |

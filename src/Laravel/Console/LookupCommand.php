@@ -36,6 +36,13 @@ final class LookupCommand extends Command
         }
 
         $drivers = array_values(array_filter((array) $this->option('driver'), 'is_string'));
+        $unknown = array_values(array_diff($drivers, array_keys($lookup->drivers())));
+        if ($unknown !== []) {
+            $this->error('Unknown driver ['.implode(', ', $unknown).']. Run company-lookup:doctor for the list.');
+
+            return self::INVALID;
+        }
+
         if ($drivers !== []) {
             $lookup = $lookup->using(...$drivers);
         }
@@ -64,7 +71,7 @@ final class LookupCommand extends Command
         }
 
         if ($outcome->registryUrl !== null) {
-            $this->warn("No driver covers {$country}. Search manually: {$outcome->registryUrl}");
+            $this->warn("Search the register manually: {$outcome->registryUrl}");
         }
 
         return $outcome->found() ? self::SUCCESS : self::FAILURE;

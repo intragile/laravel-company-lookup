@@ -7,11 +7,12 @@ namespace IntrAgile\CompanyLookup;
 use DateTimeImmutable;
 use IntrAgile\CompanyLookup\Enums\CompanyStatus;
 use IntrAgile\CompanyLookup\Enums\IdentifierType;
+use JsonSerializable;
 
 /**
  * A company as returned by one source. Fields the source does not provide are null.
  */
-final readonly class Company
+final readonly class Company implements JsonSerializable
 {
     /**
      * @param  string  $country  ISO 3166-1 alpha-2 country code of the registration.
@@ -95,5 +96,15 @@ final readonly class Company
             'founded_at' => $this->foundedAt?->format('Y-m-d'),
             'vat_valid' => $this->vatValid,
         ];
+    }
+
+    /**
+     * The toArray() form, so a Company returned from a controller serialises cleanly.
+     *
+     * @return array<string, mixed>
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

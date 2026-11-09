@@ -5,19 +5,31 @@ declare(strict_types=1);
 namespace IntrAgile\CompanyLookup;
 
 use Closure;
+use DateTimeImmutable;
 use Illuminate\Cache\RateLimiter;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use IntrAgile\CompanyLookup\Contracts\Driver;
 use IntrAgile\CompanyLookup\Drivers\Support\Normalize;
+use IntrAgile\CompanyLookup\Enums\CompanyStatus;
 use IntrAgile\CompanyLookup\Enums\FailureReason;
 use IntrAgile\CompanyLookup\Enums\IdentifierType;
 use IntrAgile\CompanyLookup\Exceptions\UnknownDriverException;
+use Throwable;
 
 /**
  * Picks the drivers that cover a country and an identifier type, and adds caching and rate limiting around them.
  */
 class CompanyLookup
 {
+    /** Bumped whenever the cached payload shape changes, so older entries are ignored. */
+    private const CACHE_VERSION = 'v1';
+
+    /** Classes a cached result may contain; anything else is rejected on read. */
+    private const CACHED_CLASSES = [
+        LookupResult::class, Company::class, Identifier::class, Address::class, ActivityCode::class,
+        DateTimeImmutable::class, CompanyStatus::class, IdentifierType::class, FailureReason::class,
+    ];
+
     /** @var array<string, Closure(): Driver> */
     private array $factories = [];
 
@@ -130,7 +142,9 @@ class CompanyLookup
         $drivers = $this->select($country, fn (Capabilities $capabilities): bool => $capabilities->supportsType($identifier->type)
             || ($widen && $capabilities->supportsType(IdentifierType::Tax)));
 
-        return $this->run($drivers, $country, 'lookup', $identifier->type->value.':'.Normalize::compact($identifier->value),
+        $subject = $identifier->type->value.':'.($identifier->scheme ?? '').':'.Normalize::compact($identifier->value);
+
+        return $this->run($drivers, $country, 'lookup', $subject,
             fn (Driver $driver): LookupResult => $driver->lookup($country, $driver->capabilities()->supportsType($identifier->type) ? $identifier : $asTax));
     }
 
@@ -156,7 +170,7 @@ class CompanyLookup
 
         $drivers = $this->select($country, fn (Capabilities $capabilities): bool => $capabilities->nameSearch);
 
-        return $this->run($drivers, $country, 'search', $limit.':'.Normalize::name($name),
+        return $this->run($drivers, $country, 'search', $limit.':'.Normalize::searchKey($name),
             fn (Driver $driver): LookupResult => $driver->search($country, $name, $limit), stopOnFound: false);
     }
 
@@ -192,7 +206,7 @@ class CompanyLookup
     private function run(array $drivers, string $country, string $operation, string $subject, Closure $call, bool $stopOnFound = true): LookupOutcome
     {
         if ($drivers === []) {
-            return new LookupOutcome([], $this->registryUrl($country));
+            return new LookupOutcome([], $this->registryUrl($country, true));
         }
 
         $stopOnFound = $stopOnFound && ($this->strategy ?? $this->stringConfig('strategy', 'first')) === 'first';
@@ -206,7 +220,9 @@ class CompanyLookup
             }
         }
 
-        return new LookupOutcome($results);
+        $found = array_filter($results, fn (LookupResult $result): bool => $result->isFound()) !== [];
+
+        return new LookupOutcome($results, $this->registryUrl($country, ! $found));
     }
 
     /**
@@ -218,11 +234,11 @@ class CompanyLookup
             return LookupResult::unconfigured($key, implode(', ', $driver->capabilities()->credentials));
         }
 
-        $cacheKey = 'company-lookup:'.$key.':'.$operation.':'.$country.':'.sha1($subject);
+        $cacheKey = 'company-lookup:'.self::CACHE_VERSION.':'.$key.':'.$operation.':'.$country.':'
+            .sha1($subject.'|'.$this->driverConfigHash($key));
         $cache = $this->cacheEnabled() ? $this->cache : null;
 
-        $cached = $cache?->get($cacheKey);
-        if ($cached instanceof LookupResult) {
+        if ($cache !== null && ($cached = $this->cachedResult($cache, $cacheKey)) !== null) {
             return $cached;
         }
 
@@ -233,10 +249,42 @@ class CompanyLookup
         $result = $call($driver);
 
         if ($cache !== null && $result->isCacheable()) {
-            $cache->put($cacheKey, $result, $this->intConfig('cache.ttl', 86400));
+            try {
+                // Stored as a string: Laravel 13 apps refuse to unserialize objects from the cache by default.
+                $cache->put($cacheKey, serialize($result), $this->intConfig('cache.ttl', 86400));
+            } catch (Throwable) {
+                // A failing cache store must not turn an answer into an exception.
+            }
         }
 
         return $result;
+    }
+
+    private function cachedResult(CacheRepository $cache, string $cacheKey): ?LookupResult
+    {
+        try {
+            $payload = $cache->get($cacheKey);
+        } catch (Throwable) {
+            return null;
+        }
+
+        if (! is_string($payload)) {
+            return null;
+        }
+
+        $result = @unserialize($payload, ['allowed_classes' => self::CACHED_CLASSES]);
+
+        return $result instanceof LookupResult ? $result : null;
+    }
+
+    /**
+     * Changes to a driver's settings (sandbox, base URL, credentials) start a fresh cache.
+     */
+    private function driverConfigHash(string $key): string
+    {
+        $section = data_get($this->config, 'drivers.'.$key);
+
+        return sha1(serialize(is_array($section) ? $section : []));
     }
 
     private function rateLimited(string $key): ?LookupResult
@@ -254,24 +302,33 @@ class CompanyLookup
         }
 
         $limiterKey = 'company-lookup:rate:'.$key;
-        if ($this->limiter->tooManyAttempts($limiterKey, $maxAttempts)) {
-            return LookupResult::failed($key, FailureReason::RateLimited, true,
-                'Local rate limit reached; retry in '.$this->limiter->availableIn($limiterKey).' s.');
-        }
 
-        $this->limiter->hit($limiterKey, max(1, $decaySeconds));
+        try {
+            if ($this->limiter->tooManyAttempts($limiterKey, $maxAttempts)) {
+                return LookupResult::failed($key, FailureReason::RateLimited, true,
+                    'Local rate limit reached; retry in '.$this->limiter->availableIn($limiterKey).' s.');
+            }
+
+            $this->limiter->hit($limiterKey, max(1, $decaySeconds));
+        } catch (Throwable) {
+            // Without a working limiter store the call goes ahead unthrottled.
+        }
 
         return null;
     }
 
-    private function registryUrl(string $country): ?string
+    /**
+     * The manual search page of the country. Countries listed under "registries" have no free
+     * register API, so their page is always given; the "*" fallback only when nothing was found.
+     */
+    private function registryUrl(string $country, bool $withFallback): ?string
     {
         $registries = $this->config['registries'] ?? [];
         if (! is_array($registries)) {
             return null;
         }
 
-        $url = $registries[$country] ?? $registries['*'] ?? null;
+        $url = $registries[$country] ?? ($withFallback ? $registries['*'] ?? null : null);
 
         return is_string($url) ? $url : null;
     }

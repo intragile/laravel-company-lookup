@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace IntrAgile\CompanyLookup\Drivers\Support;
 
+use Illuminate\Support\Str;
 use IntrAgile\CompanyLookup\Enums\IdentifierType;
 
 /**
@@ -89,13 +90,25 @@ final class Normalize
     }
 
     /**
-     * Lowercase ASCII-ish form for name comparison: accents removed, punctuation collapsed.
+     * Lowercase ASCII form for name comparison: accents removed, punctuation collapsed.
+     * Transliteration is platform-independent, so stored and searched names always agree.
      */
     public static function name(string $name): string
     {
-        $ascii = function_exists('iconv') ? (string) @iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $name) : $name;
-        $ascii = $ascii === '' ? $name : $ascii;
+        return trim((string) preg_replace('/[^a-z0-9]+/', ' ', strtolower(Str::ascii($name))));
+    }
 
-        return trim((string) preg_replace('/[^a-z0-9]+/', ' ', strtolower($ascii)));
+    /**
+     * A name in a form that identifies the search. Latin-script names use name(), so case, accents
+     * and punctuation are ignored; names with letters of other scripts keep them, so two Japanese
+     * or Greek names never collapse into the same key.
+     */
+    public static function searchKey(string $name): string
+    {
+        if (preg_match('/(?=\p{L})\P{Latin}/u', $name) !== 1) {
+            return self::name($name);
+        }
+
+        return mb_strtolower(trim((string) preg_replace('/[\s\p{P}]+/u', ' ', $name)));
     }
 }

@@ -59,7 +59,7 @@ class FakeCompanyLookup extends CompanyLookup
     public function search(string $country, string $name, ?int $limit = null): LookupOutcome
     {
         $country = strtoupper(trim($country));
-        $normalised = Normalize::name($name);
+        $normalised = Normalize::searchKey($name);
         $this->recorded[] = ['operation' => 'search', 'country' => $country, 'subject' => $normalised];
 
         return $this->answer('search:'.$country.':'.$normalised);
@@ -91,7 +91,7 @@ class FakeCompanyLookup extends CompanyLookup
         $country = strtoupper($country);
 
         Assert::assertTrue(
-            $this->wasAsked('search', $country, Normalize::name($name)),
+            $this->wasAsked('search', $country, Normalize::searchKey($name)),
             "Expected a company search for [{$name}] in [{$country}], but none was made.",
         );
     }
@@ -143,7 +143,7 @@ class FakeCompanyLookup extends CompanyLookup
         if (str_starts_with(strtolower($key), 'search:')) {
             [, $country, $name] = array_pad(explode(':', $key, 3), 3, '');
 
-            return 'search:'.strtoupper($country).':'.Normalize::name($name);
+            return 'search:'.strtoupper($country).':'.Normalize::searchKey($name);
         }
 
         [$country, $value] = array_pad(explode(':', $key, 2), 2, '');

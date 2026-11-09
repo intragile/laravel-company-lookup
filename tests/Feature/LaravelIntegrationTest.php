@@ -43,6 +43,14 @@ final class LaravelIntegrationTest extends TestCase
         $fake->assertSearched('CZ', 'ČEZ');
     }
 
+    public function test_fake_keeps_non_latin_search_keys_apart(): void
+    {
+        CompanyLookupFacade::fake(['search:JP:トヨタ' => [new Company('トヨタ自動車株式会社', 'JP', 'fake')]]);
+
+        self::assertTrue(CompanyLookupFacade::search('JP', 'トヨタ')->found());
+        self::assertFalse(CompanyLookupFacade::search('JP', 'ソニー')->found());
+    }
+
     public function test_fake_asserts_nothing_looked_up(): void
     {
         CompanyLookupFacade::fake()->assertNothingLookedUp();
@@ -72,6 +80,24 @@ final class LaravelIntegrationTest extends TestCase
         $this->command('company-lookup:lookup', ['country' => 'HU', 'identifier' => '1', '--type' => 'iban'])
             ->expectsOutputToContain('Unknown identifier type')
             ->assertExitCode(2);
+    }
+
+    public function test_commands_reject_unknown_drivers(): void
+    {
+        $this->command('company-lookup:lookup', ['country' => 'CZ', 'identifier' => '45274649', '--driver' => ['typo']])
+            ->expectsOutputToContain('Unknown driver [typo]')
+            ->assertExitCode(2);
+
+        $this->command('company-lookup:doctor', ['--driver' => ['typo']])
+            ->expectsOutputToContain('Unknown driver [typo]')
+            ->assertExitCode(2);
+    }
+
+    public function test_company_serialises_to_its_array_form(): void
+    {
+        $company = new Company('Acme Kft.', 'HU', 'test', raw: ['secret' => 'x']);
+
+        self::assertSame($company->toArray(), json_decode((string) json_encode($company), true));
     }
 
     public function test_doctor_lists_status_and_live_check(): void

@@ -218,4 +218,100 @@ final class CompanyLookupTest extends TestCase
         self::assertSame('New', $manager->lookup('HU', '1')->first()?->name);
         self::assertArrayHasKey('x', $manager->drivers());
     }
+
+    public function test_searches_in_non_latin_scripts_do_not_share_a_cache_entry(): void
+    {
+        $tw = new InMemoryDriver('tw', ['TW'], fn (string $country, Identifier|string $name) => LookupResult::found('tw', new Company(is_string($name) ? $name : $name->value, 'TW', 'tw')), nameSearch: true);
+        $manager = $this->manager();
+        $manager->extend('tw', fn () => $tw);
+
+        self::assertSame('台積電', $manager->search('TW', '台積電')->first()?->name);
+        self::assertSame('鴻海', $manager->search('TW', '鴻海')->first()?->name);
+        self::assertSame('台積電', $manager->search('TW', ' 台積電 ')->first()?->name);
+        self::assertSame(2, $tw->calls);
+    }
+
+    public function test_the_identifier_scheme_is_part_of_the_cache_key(): void
+    {
+        $gleif = new InMemoryDriver('gleif', ['*'], fn (string $country, mixed $identifier) => self::found('gleif', $identifier instanceof Identifier ? (string) $identifier->scheme : ''));
+        $manager = $this->manager();
+        $manager->extend('gleif', fn () => $gleif);
+
+        self::assertSame('RA000001', $manager->lookup('DE', new Identifier(IdentifierType::Registration, 'HRB 1', 'RA000001'))->first()?->name);
+        self::assertSame('RA000999', $manager->lookup('DE', new Identifier(IdentifierType::Registration, 'HRB 1', 'RA000999'))->first()?->name);
+        self::assertSame(2, $gleif->calls);
+    }
+
+    public function test_changing_a_driver_setting_starts_a_fresh_cache(): void
+    {
+        $driver = new InMemoryDriver('gus', ['PL'], fn () => self::found('gus'));
+        $sandbox = $this->manager(['drivers' => ['gus' => ['sandbox' => true]]]);
+        $sandbox->extend('gus', fn () => $driver);
+        $production = $this->manager(['drivers' => ['gus' => ['sandbox' => false]]]);
+        $production->extend('gus', fn () => $driver);
+
+        $sandbox->lookup('PL', '1', IdentifierType::Registration);
+        $sandbox->lookup('PL', '1', IdentifierType::Registration);
+        $production->lookup('PL', '1', IdentifierType::Registration);
+
+        self::assertSame(2, $driver->calls);
+    }
+
+    public function test_results_are_cached_as_strings_that_survive_stores_refusing_objects(): void
+    {
+        $driver = new InMemoryDriver('hu', ['HU'], fn () => self::found('hu'));
+        $manager = $this->manager();
+        $manager->extend('hu', fn () => $driver);
+
+        $manager->lookup('HU', '10773381', IdentifierType::Registration);
+
+        $store = $this->cache->getStore();
+        self::assertInstanceOf(ArrayStore::class, $store);
+        $values = array_map(fn (array $item): mixed => $item['value'], (fn (): array => $this->storage)->call($store));
+        $payloads = array_filter($values, fn (mixed $value): bool => is_string($value) && str_contains($value, 'LookupResult'));
+        self::assertCount(1, $payloads);
+
+        self::assertSame('Acme', $manager->lookup('HU', '10773381', IdentifierType::Registration)->first()?->name);
+        self::assertSame(1, $driver->calls);
+    }
+
+    public function test_a_broken_cache_store_does_not_throw(): void
+    {
+        $broken = new Repository(new class extends ArrayStore
+        {
+            public function get($key): mixed
+            {
+                throw new \RuntimeException('store down');
+            }
+
+            public function put($key, $value, $seconds): bool
+            {
+                throw new \RuntimeException('store down');
+            }
+        });
+        $driver = new InMemoryDriver('hu', ['HU'], fn () => self::found('hu'));
+        $manager = new CompanyLookup(['rate_limits' => ['hu' => [5, 60]]], $broken, new RateLimiter($broken));
+        $manager->extend('hu', fn () => $driver);
+
+        self::assertSame('Acme', $manager->lookup('HU', '10773381', IdentifierType::Registration)->first()?->name);
+    }
+
+    public function test_registry_url_is_given_for_listed_countries_even_when_a_worldwide_driver_answers(): void
+    {
+        $gleif = new InMemoryDriver('gleif', ['*'], fn () => LookupResult::notFound('gleif'), nameSearch: true);
+        $manager = $this->manager();
+        $manager->extend('gleif', fn () => $gleif);
+
+        self::assertSame('https://e-cegjegyzek.hu/', $manager->search('HU', 'acme')->registryUrl);
+        self::assertSame('https://e-justice.example', $manager->search('DE', 'acme')->registryUrl);
+    }
+
+    public function test_registry_url_fallback_is_left_out_when_something_was_found(): void
+    {
+        $cz = new InMemoryDriver('cz', ['CZ'], fn () => self::found('cz'));
+        $manager = $this->manager();
+        $manager->extend('cz', fn () => $cz);
+
+        self::assertNull($manager->lookup('CZ', '45274649')->registryUrl);
+    }
 }

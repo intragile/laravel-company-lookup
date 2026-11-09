@@ -61,6 +61,9 @@ final class SecEdgarDriver extends AbstractHttpDriver
     /** @var list<array{cik: string, title: string, tickers: list<string>}>|null */
     private ?array $tickers = null;
 
+    /** When the in-memory ticker list was loaded; long-running workers reload it hourly. */
+    private int $tickersLoadedAt = 0;
+
     public function capabilities(): Capabilities
     {
         return new Capabilities(
@@ -184,7 +187,7 @@ final class SecEdgarDriver extends AbstractHttpDriver
      */
     private function tickers(): array
     {
-        if ($this->tickers !== null) {
+        if ($this->tickers !== null && time() - $this->tickersLoadedAt < 3600) {
             return $this->tickers;
         }
 
@@ -193,6 +196,8 @@ final class SecEdgarDriver extends AbstractHttpDriver
 
         $cached = $this->decodeTickers($this->cacheGet($cacheKey));
         if ($cached !== []) {
+            $this->tickersLoadedAt = time();
+
             return $this->tickers = $cached;
         }
 
@@ -220,6 +225,8 @@ final class SecEdgarDriver extends AbstractHttpDriver
 
         $tickers = array_values($grouped);
         $this->cachePut($cacheKey, $this->encodeTickers($tickers));
+
+        $this->tickersLoadedAt = time();
 
         return $this->tickers = $tickers;
     }

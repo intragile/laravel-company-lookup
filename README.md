@@ -44,7 +44,8 @@ discovered automatically.
 ```php
 use IntrAgile\CompanyLookup\Laravel\Facades\CompanyLookup;
 
-// A VAT number with its country prefix: VIES, plus the national register if it covers VAT.
+// A VAT number with its country prefix. VIES answers first; national registers that take VAT
+// numbers are asked when VIES does not find it (or always, with all()).
 $company = CompanyLookup::vat('CZ45274649')->first();
 $company->name;                       // "ČEZ, a. s."
 $company->address?->format();         // "Duhová 1444/2, PRAHA 4 - MICHLE, 140 00 PRAHA 4"
@@ -60,6 +61,7 @@ use IntrAgile\CompanyLookup\Enums\IdentifierType;
 CompanyLookup::lookup('HU', '10773381', IdentifierType::Tax);
 
 // Name search, in every source that supports it for the country (and GLEIF).
+// The limit applies per source, so the outcome may hold more companies than the limit.
 foreach (CompanyLookup::search('FI', 'nokia', limit: 5)->companies() as $company) {
     echo $company->name, ' ', $company->identifier(IdentifierType::Registration), PHP_EOL;
 }
@@ -84,7 +86,7 @@ CompanyLookup::using('ares')->lookup('CZ', '45274649');
 | `failedSources()` / `failures()` | Sources that did not answer, with `reason` and `retryable` |
 | `unconfiguredSources()` | Sources skipped because their key is missing |
 | `isComplete()` | `true` when every source gave a definitive answer |
-| `registryUrl` | A page to search by hand, set when no source covers the country |
+| `registryUrl` | A page to search by hand: always for countries without a free register API, otherwise when nothing was found |
 
 A `Company` has `name`, `country`, `source`, `identifiers` (VAT, registration, tax, LEI, each with
 its national scheme such as `CZ-ICO`), `address` (structured where the registry provides it),
@@ -162,8 +164,8 @@ If you run one of these with your key, please open an issue with the result.
 | `hmrc` | GB | VAT | – | [HMRC Developer Hub](https://developer.service.hmrc.gov.uk/), app subscribed to *Check a UK VAT number* | 📄 docs |
 | `gus-regon` | PL | REGON, NIP | – | Request a key from [GUS](https://api.stat.gov.pl/Home/RegonApi); the public test key works with `COMPANY_LOOKUP_GUS_REGON_SANDBOX=true` | ✅ sandbox |
 | `cro` | IE | company no. | ✅ | [CRO Open Services](https://services.cro.ie/) | 📄 docs |
-| `cvr` | DK | CVR, VAT | ✅ | System-to-system access from [Erhvervsstyrelsen](https://erhvervsstyrelsen.dk/kom-godt-igang-med-elasticSearch) (by e-mail) | 📄 docs |
-| `bolagsverket` | SE | org.nr, VAT | – | [Bolagsverket API portal](https://portal.api.bolagsverket.se/), *Värdefulla datamängder* | 📄 docs |
+| `cvr` | DK | CVR | ✅ | System-to-system access from [Erhvervsstyrelsen](https://erhvervsstyrelsen.dk/kom-godt-igang-med-elasticSearch) (by e-mail) | 📄 docs |
+| `bolagsverket` | SE | org.nr | – | [Bolagsverket API portal](https://portal.api.bolagsverket.se/), *Värdefulla datamängder* | 📄 docs |
 | `sudreg` | HR | MBS, OIB | – | [sudreg-data.gov.hr](https://sudreg-data.gov.hr/) | 📄 docs |
 | `gemi` | GR | GEMI no., AFM | ✅ | [GEMI open data API](https://opendata-api.businessportal.gr/) | 📄 docs |
 | `abn` | AU | ABN, ACN | ✅ | [ABN Lookup web services](https://abr.business.gov.au/Tools/WebServices) (GUID) | 📄 docs |

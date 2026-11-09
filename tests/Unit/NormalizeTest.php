@@ -62,4 +62,13 @@ final class NormalizeTest extends TestCase
         self::assertSame('10773381', Normalize::digits('HU-1077 3381'));
         self::assertSame('CHE105909036', Normalize::compact('che-105.909.036'));
     }
+
+    public function test_search_key_ignores_accents_in_latin_names_but_keeps_other_scripts(): void
+    {
+        self::assertSame('cez a s', Normalize::searchKey('ČEZ, a. s.'));
+        self::assertSame('cafe', Normalize::name('café'));
+        self::assertSame('台積電', Normalize::searchKey(' 台積電 '));
+        self::assertNotSame(Normalize::searchKey('トヨタ'), Normalize::searchKey('ソニー'));
+        self::assertSame('οτε', Normalize::searchKey('ΟΤΕ'));
+    }
 }
