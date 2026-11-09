@@ -6,7 +6,7 @@ namespace IntrAgile\CompanyLookup;
 
 /**
  * The drivers that ship with the package, in default priority order.
- * The service provider registers each one whose class exists.
+ * The service provider registers each one whose class exists; bulk datasets come after the HTTP drivers.
  */
 final class BuiltInDrivers
 {
@@ -41,5 +41,12 @@ final class BuiltInDrivers
         'ised' => Drivers\IsedDriver::class,
         'brasilapi' => Drivers\BrasilApiDriver::class,
         'gleif' => Drivers\GleifDriver::class,
+    ];
+
+    /** @var array<string, string> Bulk datasets answered from the local table after `company-lookup:import`. */
+    public const BULK = [
+        'lv-ur' => Bulk\Datasets\LatviaUr::class,
+        'ee-rik' => Bulk\Datasets\EstoniaRik::class,
+        'be-kbo' => Bulk\Datasets\BelgiumKbo::class,
     ];
 }

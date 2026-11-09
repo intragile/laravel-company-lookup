@@ -7,17 +7,23 @@ namespace IntrAgile\CompanyLookup\Laravel;
 use Illuminate\Cache\RateLimiter;
 use Illuminate\Contracts\Cache\Factory as CacheFactory;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Database\ConnectionResolverInterface;
 use Illuminate\Http\Client\Factory as HttpFactory;
 use Illuminate\Support\ServiceProvider;
 use IntrAgile\CompanyLookup\BuiltInDrivers;
+use IntrAgile\CompanyLookup\Bulk\BulkDriver;
+use IntrAgile\CompanyLookup\Bulk\Importer;
 use IntrAgile\CompanyLookup\CompanyLookup;
 use IntrAgile\CompanyLookup\Contracts\Driver;
 use IntrAgile\CompanyLookup\Drivers\AbstractHttpDriver;
 use IntrAgile\CompanyLookup\Laravel\Console\DoctorCommand;
+use IntrAgile\CompanyLookup\Laravel\Console\ImportCommand;
 use IntrAgile\CompanyLookup\Laravel\Console\LookupCommand;
 
 final class CompanyLookupServiceProvider extends ServiceProvider
 {
+    private const MIGRATION = __DIR__.'/../../database/migrations/create_company_lookup_records_table.php';
+
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__.'/../../config/company-lookup.php', 'company-lookup');
@@ -48,8 +54,22 @@ final class CompanyLookupServiceProvider extends ServiceProvider
                 });
             }
 
+            foreach (BuiltInDrivers::BULK as $key => $class) {
+                $lookup->extend($key, fn (): Driver => new BulkDriver(
+                    new $class(self::section(data_get($config, 'drivers.'.$key))),
+                    $app->make(ConnectionResolverInterface::class),
+                    $config,
+                ));
+            }
+
             return $lookup;
         });
+
+        $this->app->bind(Importer::class, fn (Application $app): Importer => new Importer(
+            $app->make(HttpFactory::class),
+            $app->make(ConnectionResolverInterface::class),
+            self::section($app->make('config')->get('company-lookup', [])),
+        ));
 
         $this->app->alias(CompanyLookup::class, 'company-lookup');
     }
@@ -81,6 +101,14 @@ final class CompanyLookupServiceProvider extends ServiceProvider
             __DIR__.'/../../config/company-lookup.php' => $this->app->configPath('company-lookup.php'),
         ], 'company-lookup-config');
 
-        $this->commands([LookupCommand::class, DoctorCommand::class]);
+        $this->publishes([
+            self::MIGRATION => $this->app->databasePath('migrations/'.date('Y_m_d_His').'_create_company_lookup_records_table.php'),
+        ], 'company-lookup-migrations');
+
+        if (filter_var($this->app->make('config')->get('company-lookup.bulk.enabled', false), FILTER_VALIDATE_BOOL)) {
+            $this->loadMigrationsFrom(self::MIGRATION);
+        }
+
+        $this->commands([LookupCommand::class, DoctorCommand::class, ImportCommand::class]);
     }
 }

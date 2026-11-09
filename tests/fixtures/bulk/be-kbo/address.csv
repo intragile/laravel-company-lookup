@@ -1,0 +1,6 @@
+"EntityNumber","TypeOfAddress","CountryNL","CountryFR","Zipcode","MunicipalityNL","MunicipalityFR","StreetNL","StreetFR","HouseNumber","Box","ExtraAddressInfo","DateStrikingOff"
+"0123.456.749","REGO",,,"1000","Brussel","Bruxelles","Wetstraat","Rue de la Loi","16",,,
+"0987.654.394","REGO",,,"4000","Luik","Liège",,"Rue Léopold","5","2",,
+"2.123.456.789","BAET",,,"2000","Antwerpen","Anvers","Meir","Meir","1",,,
+"0444.444.496","REGO",,,"1050","Elsene","Ixelles","Louizalaan","Avenue Louise","1",,,"01-01-2020"
+"0444.444.496","REGO","Nederland","Pays-Bas","1012","Amsterdam","Amsterdam","Damrak","Damrak","1",,"City Atrium",
