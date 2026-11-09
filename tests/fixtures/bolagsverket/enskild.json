@@ -1,0 +1,150 @@
+{
+  "organisationer": [
+    {
+      "avregistreradOrganisation": {
+        "avregistreringsdatum": 984614400000,
+        "dataproducent": "Bolagsverket",
+        "fel": null
+      },
+      "avregistreringsorsak": {
+        "dataproducent": "Bolagsverket",
+        "fel": null,
+        "klartext": "n/a",
+        "kod": "VERKUPP"
+      },
+      "juridiskForm": null,
+      "namnskyddslopnummer": 1,
+      "naringsgrenOrganisation": null,
+      "organisationsdatum": {
+        "dataproducent": "Bolagsverket",
+        "fel": null,
+        "infortHosScb": null,
+        "registreringsdatum": 634521600000
+      },
+      "organisationsform": {
+        "dataproducent": "Bolagsverket",
+        "fel": null,
+        "klartext": "Enskild näringsidkare",
+        "kod": "E"
+      },
+      "organisationsidentitet": {
+        "identitetsbeteckning": "194009272719",
+        "typ": {
+          "klartext": "n/a",
+          "kod": "PERSONNUMMER"
+        }
+      },
+      "organisationsnamn": {
+        "dataproducent": "Bolagsverket",
+        "fel": null,
+        "organisationsnamnLista": [
+          {
+            "namn": "CITY SKOR THOMAS CARLSON",
+            "organisationsnamntyp": {
+              "klartext": "n/a",
+              "kod": "FORETAGSNAMN"
+            },
+            "registreringsdatum": 634521600000,
+            "verksamhetsbeskrivningSarskiltForetagsnamn": null
+          }
+        ]
+      },
+      "pagaendeAvvecklingsEllerOmstruktureringsforfarande": null,
+      "postadressOrganisation": {
+        "dataproducent": "Bolagsverket",
+        "fel": null,
+        "postadress": {
+          "coAdress": "C/o annan adress",
+          "land": "Sverige",
+          "postnummer": "24131",
+          "postort": "ESLÖV",
+          "utdelningsadress": "VÄSTERG 5"
+        }
+      },
+      "registreringsland": {
+        "klartext": "Sverige",
+        "kod": "SE-LAND"
+      },
+      "reklamsparr": null,
+      "verksamOrganisation": null,
+      "verksamhetsbeskrivning": {
+        "beskrivning": "\\n       HANDEL MED SKOR.",
+        "dataproducent": "Bolagsverket",
+        "fel": null
+      }
+    },
+    {
+      "avregistreradOrganisation": {
+        "avregistreringsdatum": 1588636800000,
+        "dataproducent": "Bolagsverket",
+        "fel": null
+      },
+      "avregistreringsorsak": {
+        "dataproducent": "Bolagsverket",
+        "fel": null,
+        "klartext": "n/a",
+        "kod": "OVERK"
+      },
+      "juridiskForm": null,
+      "namnskyddslopnummer": 2,
+      "naringsgrenOrganisation": null,
+      "organisationsdatum": {
+        "dataproducent": "Bolagsverket",
+        "fel": null,
+        "infortHosScb": null,
+        "registreringsdatum": 471744000000
+      },
+      "organisationsform": {
+        "dataproducent": "Bolagsverket",
+        "fel": null,
+        "klartext": "Enskild näringsidkare",
+        "kod": "E"
+      },
+      "organisationsidentitet": {
+        "identitetsbeteckning": "194009272719",
+        "typ": {
+          "klartext": "n/a",
+          "kod": "PERSONNUMMER"
+        }
+      },
+      "organisationsnamn": {
+        "dataproducent": "Bolagsverket",
+        "fel": null,
+        "organisationsnamnLista": [
+          {
+            "namn": "SKO-STALLET, THOMAS CARLSSON",
+            "organisationsnamntyp": {
+              "klartext": "n/a",
+              "kod": "FORETAGSNAMN"
+            },
+            "registreringsdatum": 471744000000,
+            "verksamhetsbeskrivningSarskiltForetagsnamn": null
+          }
+        ]
+      },
+      "pagaendeAvvecklingsEllerOmstruktureringsforfarande": null,
+      "postadressOrganisation": {
+        "dataproducent": "Bolagsverket",
+        "fel": null,
+        "postadress": {
+          "coAdress": "c/o Skåneplantor",
+          "land": "Sverige",
+          "postnummer": "24592",
+          "postort": "STAFFANSTORP",
+          "utdelningsadress": "Vesumsvägen 9-30"
+        }
+      },
+      "registreringsland": {
+        "klartext": "Sverige",
+        "kod": "SE-LAND"
+      },
+      "reklamsparr": null,
+      "verksamOrganisation": null,
+      "verksamhetsbeskrivning": {
+        "beskrivning": "\\n       HANDEL MED SKOR",
+        "dataproducent": "Bolagsverket",
+        "fel": null
+      }
+    }
+  ]
+}

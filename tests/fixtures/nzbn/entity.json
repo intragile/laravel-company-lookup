@@ -1,0 +1,71 @@
+{
+  "entityStatusCode": "50",
+  "entityName": "JACOBS DOUWE EGBERTS NZ",
+  "nzbn": "9429000001885",
+  "entityTypeCode": "LTD",
+  "entityTypeDescription": "NZ Limited Company",
+  "entityStatusDescription": "Registered",
+  "registrationDate": "1929-03-18T00:00:00.000+12:00",
+  "sourceRegister": "COMPANY",
+  "sourceRegisterUniqueIdentifier": "1002",
+  "lastUpdatedDate": "2026-05-02T10:14:00.000+12:00",
+  "australianBusinessNumber": null,
+  "emailAddresses": [],
+  "addresses": {
+    "links": [],
+    "addressList": [
+      {
+        "uniqueIdentifier": "a1",
+        "startDate": "2001-01-01T00:00:00.000+13:00",
+        "endDate": "2019-06-30T00:00:00.000+12:00",
+        "careOf": null,
+        "address1": "1 Old Street",
+        "address2": "Penrose",
+        "address3": "Auckland",
+        "address4": null,
+        "postCode": "1061",
+        "countryCode": "NZ",
+        "addressType": "REGISTERED",
+        "pafId": null
+      },
+      {
+        "uniqueIdentifier": "a2",
+        "startDate": "2019-07-01T00:00:00.000+12:00",
+        "endDate": null,
+        "careOf": null,
+        "address1": "Level 2, 55 Shortland Street",
+        "address2": "Auckland Central",
+        "address3": "Auckland",
+        "address4": null,
+        "postCode": "1010",
+        "countryCode": "NZ",
+        "addressType": "REGISTERED",
+        "pafId": "3001234"
+      },
+      {
+        "uniqueIdentifier": "a3",
+        "startDate": "2019-07-01T00:00:00.000+12:00",
+        "endDate": null,
+        "careOf": null,
+        "address1": "PO Box 1234",
+        "address2": "Shortland Street",
+        "address3": "Auckland",
+        "address4": null,
+        "postCode": "1140",
+        "countryCode": "NZ",
+        "addressType": "POSTAL",
+        "pafId": null
+      }
+    ]
+  },
+  "industryClassifications": [
+    {
+      "uniqueIdentifier": "c1",
+      "classificationCode": "C119920",
+      "classificationDescription": "Coffee roasting"
+    }
+  ],
+  "phoneNumbers": [],
+  "websites": [],
+  "tradingNames": []
+}

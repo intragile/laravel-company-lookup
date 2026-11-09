@@ -1,0 +1,9 @@
+{
+  "type": "about:blank",
+  "instance": "client.error",
+  "status": 401,
+  "timestamp": null,
+  "requestId": null,
+  "title": "Unauthorized",
+  "detail": "Anroparen saknar giltiga autentiseringsuppgifter."
+}

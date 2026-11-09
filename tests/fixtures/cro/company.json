@@ -1,0 +1,20 @@
+{
+  "company_num": 104547,
+  "company_bus_ind": "C",
+  "company_name": "RYANAIR DESIGNATED ACTIVITY COMPANY",
+  "company_addr_1": "RYANAIR DAC",
+  "company_addr_2": "AIRSIDE BUSINESS PARK",
+  "company_addr_3": "SWORDS",
+  "company_addr_4": "CO. DUBLIN",
+  "company_reg_date": "1984-11-28T00:00:00Z",
+  "company_status_desc": "Normal",
+  "company_status_date": "1984-11-28T00:00:00Z",
+  "last_ar_date": "2026-02-15T00:00:00Z",
+  "next_ar_date": "2027-02-15T00:00:00Z",
+  "last_acc_date": "2025-03-31T00:00:00Z",
+  "comp_type_desc": "DAC - Designated Activity Company limited by shares",
+  "company_type_code": 1153,
+  "company_status_code": 1,
+  "place_of_business": "",
+  "eircode": "K67NY94"
+}

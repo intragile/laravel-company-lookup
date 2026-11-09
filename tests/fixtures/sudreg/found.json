@@ -1,0 +1,33 @@
+{
+  "mbs": 80266256,
+  "status": 1,
+  "sud_nadlezan": {"sifra": 1, "naziv": "Trgovački sud u Zagrebu", "naziv_naselja": "Zagreb"},
+  "sud_sluzba": {"sifra": 1, "naziv": "Trgovački sud u Zagrebu", "naziv_naselja": "Zagreb"},
+  "oib": 81793146560,
+  "mb": 1513362,
+  "potpuni_mbs": "080266256",
+  "potpuni_oib": "81793146560",
+  "ino_podruznica": 0,
+  "stecajna_masa": 0,
+  "likvidacijska_masa": 0,
+  "glavna_djelatnost": 6110,
+  "datum_osnivanja": "1999-01-01T00:00:00Z",
+  "vrijeme_zadnje_izmjene": "2026-10-28T09:12:44Z",
+  "scn_zadnje_izmjene": 1234567890,
+  "tvrtka": {"ime": "HRVATSKI TELEKOM d.d. za obavljanje telekomunikacijskih usluga", "naznaka_imena": "HRVATSKI TELEKOM"},
+  "skracena_tvrtka": {"ime": "HRVATSKI TELEKOM d.d."},
+  "sjediste": {
+    "drzava": {"sifra": 191, "naziv": "Hrvatska", "oznaka_2": "HR", "oznaka_3": "HRV"},
+    "sifra_zupanije": 21,
+    "naziv_zupanije": "Grad Zagreb",
+    "sifra_opcine": 133,
+    "naziv_opcine": "Zagreb",
+    "sifra_naselja": 6572,
+    "naziv_naselja": "Zagreb",
+    "ulica": "Radnička cesta",
+    "kucni_broj": 21,
+    "postanski_broj": 10000
+  },
+  "pravni_oblik": {"vrsta_pravnog_oblika": {"sifra": 2, "naziv": "dioničko društvo", "kratica": "d.d."}},
+  "pretezita_djelatnost": {"nacionalna_klasifikacija_djelatnosti": {"sifra": "61.10", "puni_naziv": "Djelatnosti žičane telekomunikacije", "verzija": "NKD 2007"}}
+}

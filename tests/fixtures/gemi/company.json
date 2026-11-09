@@ -1,0 +1,33 @@
+{
+  "arGemi": 828201000,
+  "afm": "094349850",
+  "coNameEl": "VODAFONE-ΠΑΝΑΦΟΝ ΑΝΩΝΥΜΗ ΕΛΛΗΝΙΚΗ ΕΤΑΙΡΙΑ ΤΗΛΕΠΙΚΟΙΝΩΝΙΩΝ",
+  "coNamesEn": ["VODAFONE-PANAFON HELLENIC TELECOMMUNICATIONS COMPANY S.A."],
+  "coTitlesEl": ["VODAFONE"],
+  "coTitlesEn": ["VODAFONE"],
+  "municipality": {"id": "5101", "prefectureId": "51", "descr": "ΧΑΛΑΝΔΡΙΟΥ", "descrEn": "CHALANDRI", "lastUpdated": "2024-01-01"},
+  "prefecture": {"id": "51", "descr": "ΑΤΤΙΚΗΣ", "descrEn": "ATTICA", "lastUpdated": "2024-01-01"},
+  "city": "ΧΑΛΑΝΔΡΙ",
+  "street": "ΤΖΑΒΕΛΛΑ",
+  "streetNumber": "1-3",
+  "zipCode": "15231",
+  "poBox": null,
+  "url": "www.vodafone.gr",
+  "email": null,
+  "isBranch": false,
+  "objective": "Παροχή υπηρεσιών ηλεκτρονικών επικοινωνιών",
+  "legalType": {"id": 2, "descr": "ΑΕ", "descrEn": "SA", "lastUpdated": "2024-01-01"},
+  "gemiOffice": {"id": "1", "descr": "ΕΠΙΜΕΛΗΤΗΡΙΟ ΑΘΗΝΩΝ"},
+  "incorporationDate": "1992-07-21",
+  "lastStatusChange": "1992-07-21",
+  "status": {"id": 3, "descr": "Ενεργή", "descrEn": "Active", "isActive": true, "lastUpdated": "2024-01-01"},
+  "autoRegistered": true,
+  "activities": [
+    {"activity": {"id": "61.20", "descr": "Δραστηριότητες ασύρματων τηλεπικοινωνιών", "descrEn": "Wireless telecommunications activities", "kadVersion": "2008"}, "type": "Κύρια", "dtFrom": "1992-07-21", "dtTo": null},
+    {"activity": {"id": "64.20", "descr": "Τηλεπικοινωνίες", "descrEn": "Telecommunications", "kadVersion": "2008"}, "type": "Δευτερεύουσα", "dtFrom": "1992-07-21", "dtTo": "2008-12-31"}
+  ],
+  "persons": [],
+  "capital": [],
+  "stocks": [],
+  "branch": []
+}

@@ -1,0 +1,9 @@
+{
+  "type": "about:blank",
+  "instance": "client.error",
+  "timestamp": 1726651944000,
+  "requestId": "f628a504-4631-4c04-8358-f17fc370ac79",
+  "status": 400,
+  "title": "Bad Request",
+  "detail": "Identitetsbeteckning har ogiltig kontrollsiffra."
+}

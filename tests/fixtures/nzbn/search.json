@@ -1,0 +1,38 @@
+{
+  "pageSize": 2,
+  "page": 0,
+  "totalItems": 2,
+  "sortBy": "entityName",
+  "sortOrder": "ASC",
+  "items": [
+    {
+      "entityStatusCode": "50",
+      "entityName": "JACOBS DOUWE EGBERTS NZ",
+      "nzbn": "9429000001885",
+      "entityTypeCode": "LTD",
+      "entityTypeDescription": "NZ Limited Company",
+      "entityStatusDescription": "Registered",
+      "tradingNames": [],
+      "classifications": [],
+      "previousEntityNames": ["DOUWE EGBERTS NZ LIMITED"],
+      "registrationDate": "1929-03-18T00:00:00.000+12:00",
+      "sourceRegisterUniqueId": "1002",
+      "links": []
+    },
+    {
+      "entityStatusCode": "80",
+      "entityName": "JACOBS COFFEE TRADERS LIMITED",
+      "nzbn": "9429031127981",
+      "entityTypeCode": "LTD",
+      "entityTypeDescription": "NZ Limited Company",
+      "entityStatusDescription": "Removed",
+      "tradingNames": [],
+      "classifications": [],
+      "previousEntityNames": [],
+      "registrationDate": "2003-02-11T00:00:00.000+13:00",
+      "sourceRegisterUniqueId": "1290001",
+      "links": []
+    }
+  ],
+  "links": []
+}
