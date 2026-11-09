@@ -1,0 +1,88 @@
+{
+    "name": "intragile/laravel-company-lookup",
+    "description": "Look up companies in free official business registries worldwide through one Laravel API: EU VIES, GLEIF and national registries (CZ, SK, PL, RO, FR, NO, FI, CH, UK, HU and more), with a unified Company object, caching, rate limiting and a test fake. Cégkeresés ingyenes hivatalos nyilvántartókban.",
+    "keywords": [
+        "laravel",
+        "company-lookup",
+        "company-registry",
+        "business-registry",
+        "vies",
+        "vat-validation",
+        "gleif",
+        "lei",
+        "ares",
+        "krs",
+        "companies-house",
+        "brreg",
+        "kyb",
+        "cégkereső",
+        "cégjegyzék"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://intragile.eu",
+    "support": {
+        "issues": "https://github.com/intragile/laravel-company-lookup/issues",
+        "source": "https://github.com/intragile/laravel-company-lookup",
+        "security": "https://github.com/intragile/laravel-company-lookup/security/policy"
+    },
+    "authors": [
+        {
+            "name": "IntrAgile Kft.",
+            "email": "info@intragile.eu",
+            "homepage": "https://intragile.eu"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "ext-libxml": "*",
+        "ext-simplexml": "*",
+        "guzzlehttp/guzzle": "^7.9",
+        "illuminate/cache": "^12.0|^13.0",
+        "illuminate/console": "^12.0|^13.0",
+        "illuminate/database": "^12.0|^13.0",
+        "illuminate/http": "^12.0|^13.0",
+        "illuminate/support": "^12.0|^13.0"
+    },
+    "require-dev": {
+        "larastan/larastan": "^3.0",
+        "laravel/pint": "^1.20",
+        "orchestra/testbench": "^10.0|^11.0",
+        "phpunit/phpunit": "^12.0"
+    },
+    "suggest": {
+        "ext-zip": "Required by the Estonian bulk dataset import (zip archive).",
+        "intragile/laravel-nav-online-szamla": "Enables the Hungarian NAV taxpayer driver with your own NAV technical user."
+    },
+    "autoload": {
+        "psr-4": {
+            "IntrAgile\\CompanyLookup\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "IntrAgile\\CompanyLookup\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "IntrAgile\\CompanyLookup\\Laravel\\CompanyLookupServiceProvider"
+            ],
+            "aliases": {
+                "CompanyLookup": "IntrAgile\\CompanyLookup\\Laravel\\Facades\\CompanyLookup"
+            }
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test:e2e": "phpunit --group e2e",
+        "analyse": "phpstan analyse --memory-limit=1G",
+        "format": "pint"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
