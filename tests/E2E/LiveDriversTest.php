@@ -50,7 +50,7 @@ final class LiveDriversTest extends TestCase
         self::assertNotNull($capabilities->sample, "{$key} has no sample identifier.");
         $result = $driver->lookup($capabilities->sampleCountry(), new Identifier($capabilities->identifierTypes[0], $capabilities->sample));
 
-        self::assertTrue($result->isFound(), "{$key}: ".$result->state.' '.($result->reason?->value ?? '').' '.($result->message ?? ''));
+        self::assertTrue($result->isFound(), "{$key}: ".$result->state.' '.($result->reason->value ?? '').' '.($result->message ?? ''));
         self::assertNotNull($result->first()?->name, "{$key}: the sample has no name.");
     }
 }
