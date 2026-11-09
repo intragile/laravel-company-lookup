@@ -36,10 +36,6 @@ final class LiveDriversTest extends TestCase
     #[DataProvider('drivers')]
     public function test_driver_finds_its_sample(string $key): void
     {
-        if (! class_exists(BuiltInDrivers::HTTP[$key])) {
-            self::markTestSkipped("{$key} is not built.");
-        }
-
         $driver = $this->container()->make(CompanyLookup::class)->driver($key);
         $capabilities = $driver->capabilities();
 

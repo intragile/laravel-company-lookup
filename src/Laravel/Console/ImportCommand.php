@@ -8,6 +8,7 @@ use Illuminate\Console\Command;
 use IntrAgile\CompanyLookup\Bulk\BulkDriver;
 use IntrAgile\CompanyLookup\Bulk\Importer;
 use IntrAgile\CompanyLookup\CompanyLookup;
+use IntrAgile\CompanyLookup\Drivers\AbstractHttpDriver;
 use Throwable;
 
 final class ImportCommand extends Command
@@ -69,7 +70,7 @@ final class ImportCommand extends Command
             try {
                 $report = $importer->import($dataset, $force);
             } catch (Throwable $exception) {
-                $this->error("{$key}: {$exception->getMessage()}");
+                $this->error($key.': '.AbstractHttpDriver::redact($exception->getMessage()));
                 $failed++;
 
                 continue;

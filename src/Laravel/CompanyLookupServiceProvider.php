@@ -43,10 +43,6 @@ final class CompanyLookupServiceProvider extends ServiceProvider
             ];
 
             foreach (BuiltInDrivers::HTTP as $key => $class) {
-                if (! is_a($class, AbstractHttpDriver::class, true)) {
-                    continue;
-                }
-
                 $lookup->extend($key, function () use ($app, $class, $key, $config, $cache, $options): Driver {
                     $section = data_get($config, 'drivers.'.$key);
 

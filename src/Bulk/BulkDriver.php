@@ -13,6 +13,7 @@ use IntrAgile\CompanyLookup\Capabilities;
 use IntrAgile\CompanyLookup\Company;
 use IntrAgile\CompanyLookup\Contracts\BulkDataset;
 use IntrAgile\CompanyLookup\Contracts\Driver;
+use IntrAgile\CompanyLookup\Drivers\AbstractHttpDriver;
 use IntrAgile\CompanyLookup\Drivers\Support\Data;
 use IntrAgile\CompanyLookup\Drivers\Support\Normalize;
 use IntrAgile\CompanyLookup\Enums\CompanyStatus;
@@ -156,7 +157,7 @@ final class BulkDriver implements Driver
 
             return $call();
         } catch (Throwable $exception) {
-            return LookupResult::failed($this->dataset->key(), FailureReason::Unavailable, true, $exception->getMessage());
+            return LookupResult::failed($this->dataset->key(), FailureReason::Unavailable, true, AbstractHttpDriver::redact($exception->getMessage()));
         }
     }
 

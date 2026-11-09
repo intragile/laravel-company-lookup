@@ -6,11 +6,11 @@ namespace IntrAgile\CompanyLookup;
 
 /**
  * The drivers that ship with the package, in default priority order.
- * The service provider registers each one whose class exists; bulk datasets come after the HTTP drivers.
+ * Bulk datasets are registered after the HTTP drivers.
  */
 final class BuiltInDrivers
 {
-    /** @var array<string, string> Class names as strings: optional drivers may be absent. */
+    /** @var array<string, class-string<Drivers\AbstractHttpDriver>> */
     public const HTTP = [
         'vies' => Drivers\ViesDriver::class,
         'nav' => Drivers\NavDriver::class,

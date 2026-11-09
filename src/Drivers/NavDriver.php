@@ -148,7 +148,7 @@ final class NavDriver extends AbstractHttpDriver
 
     private function navFailure(Throwable $exception): LookupResult
     {
-        $message = $exception->getMessage();
+        $message = AbstractHttpDriver::redact($exception->getMessage());
 
         return match (true) {
             $exception instanceof TransportException => LookupResult::failed(self::KEY, FailureReason::Timeout, true, $message),

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace IntrAgile\CompanyLookup\Tests\Feature;
 
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Cache;
@@ -98,6 +99,24 @@ final class AbstractHttpDriverTest extends TestCase
 
         self::assertSame(FailureReason::Timeout, $result->reason);
         self::assertTrue($result->retryable);
+    }
+
+    public function test_connection_errors_do_not_leak_query_string_credentials(): void
+    {
+        Http::fake(fn () => throw new ConnectionException(
+            'cURL error 7: Failed to connect for http://user:pass@probe.test/x?abn=1&guid=SECRET-GUID&callback=cb'));
+
+        $message = (string) $this->driver()->lookup('HU', Identifier::registration('1'))->message;
+
+        self::assertStringNotContainsString('SECRET-GUID', $message);
+        self::assertStringNotContainsString('pass', $message);
+        self::assertStringContainsString('guid=***', $message);
+    }
+
+    public function test_redact_keeps_messages_without_urls(): void
+    {
+        self::assertSame('HTTP 500', AbstractHttpDriver::redact('HTTP 500'));
+        self::assertSame('see https://x.test/a?id=***&b=***', AbstractHttpDriver::redact('see https://x.test/a?id=1&b=two'));
     }
 
     public function test_invalid_json_is_an_invalid_response(): void

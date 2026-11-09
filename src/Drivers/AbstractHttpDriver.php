@@ -124,12 +124,23 @@ abstract class AbstractHttpDriver implements Driver
         try {
             return $call();
         } catch (ConnectionException $exception) {
-            return LookupResult::failed(static::KEY, FailureReason::Timeout, true, $exception->getMessage());
+            return LookupResult::failed(static::KEY, FailureReason::Timeout, true, self::redact($exception->getMessage()));
         } catch (RequestException $exception) {
             return $this->failure($exception->response);
         } catch (Throwable $exception) {
-            return LookupResult::failed(static::KEY, FailureReason::InvalidResponse, false, $exception->getMessage());
+            return LookupResult::failed(static::KEY, FailureReason::InvalidResponse, false, self::redact($exception->getMessage()));
         }
+    }
+
+    /**
+     * Removes query-string values and URL user info from a message, so keys sent as query
+     * parameters (and Basic credentials in URLs) never reach results, logs or the doctor output.
+     */
+    public static function redact(string $message): string
+    {
+        $message = (string) preg_replace('#(https?://)[^/\s:@]+:[^/\s@]*@#i', '$1***@', $message);
+
+        return (string) preg_replace('/([?&][^=\s&#"\']+=)[^&\s#"\']*/', '$1***', $message);
     }
 
     /**
