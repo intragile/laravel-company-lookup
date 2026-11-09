@@ -16,13 +16,14 @@ jobs:
       - uses: actions/checkout@v7
       - uses: shivammathur/setup-php@v2
         with:
-          php: ${{ matrix.php }}
-          extensions: none, ctype, curl, dom, fileinfo, filter, iconv, json, libxml, mbstring, openssl, pdo, pdo_sqlite, sqlite3, phar, simplexml, tokenizer, xml, xmlwriter, zip
+          php-version: ${{ matrix.php }}
+          extensions: none, bcmath, ctype, curl, dom, fileinfo, filter, iconv, json, libxml, mbstring, openssl, pdo, pdo_sqlite, sqlite3, phar, simplexml, tokenizer, xml, xmlwriter, zip
           coverage: none
       - run: composer require "illuminate/support:${{ matrix.laravel }}" --no-update --no-interaction
       - run: composer update --prefer-dist --no-interaction --no-progress
-      - name: ext-soap must not be needed
+      - name: PHP version and no ext-soap
         run: |
+          php -r 'exit(str_starts_with(PHP_VERSION, "${{ matrix.php }}.") ? 0 : 1);'
           php -r 'exit(extension_loaded("soap") ? 1 : 0);'
       - run: vendor/bin/phpunit
       - run: vendor/bin/phpstan analyse --memory-limit=1G
