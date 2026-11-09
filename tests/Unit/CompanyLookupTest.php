@@ -185,6 +185,22 @@ final class CompanyLookupTest extends TestCase
         self::assertSame(0, $c->calls);
     }
 
+    public function test_a_bare_number_also_reaches_tax_number_drivers(): void
+    {
+        $seen = [];
+        $tax = new InMemoryDriver('tax', ['RO'], function (string $country, Identifier|string $identifier) use (&$seen): LookupResult {
+            $seen[] = $identifier instanceof Identifier ? $identifier->type : null;
+
+            return self::found('tax');
+        }, [IdentifierType::Tax]);
+        $manager = $this->manager(['cache' => ['enabled' => false]]);
+        $manager->extend('tax', fn () => $tax);
+
+        self::assertTrue($manager->lookup('RO', '1590082')->found());
+        self::assertSame([IdentifierType::Tax], $seen);
+        self::assertFalse($manager->lookup('RO', '1590082', IdentifierType::Registration)->found(), 'an explicit type is not widened');
+    }
+
     public function test_unknown_driver_throws(): void
     {
         $this->expectException(UnknownDriverException::class);

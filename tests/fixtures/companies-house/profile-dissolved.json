@@ -1,0 +1,17 @@
+{
+  "company_name": "EXAMPLE TRADING LTD",
+  "company_number": "SC012345",
+  "company_status": "dissolved",
+  "date_of_cessation": "2020-06-30",
+  "date_of_creation": "1990-03-01",
+  "jurisdiction": "scotland",
+  "links": { "self": "/company/SC012345" },
+  "registered_office_address": {
+    "address_line_1": "1 Example Street",
+    "locality": "Edinburgh",
+    "postal_code": "EH1 1AA",
+    "country": "Scotland"
+  },
+  "sic_codes": ["62012", "70229"],
+  "type": "ltd"
+}

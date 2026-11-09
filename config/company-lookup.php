@@ -69,6 +69,8 @@ return [
         'sudreg' => [6, 60],
         'sec-edgar' => [8, 1],
         'companies-house' => [500, 300],
+        'swiss-uid' => [20, 60],
+        'il-registrar' => [30, 60],
     ],
 
     /*
@@ -212,5 +214,12 @@ return [
         'enabled' => (bool) env('COMPANY_LOOKUP_BULK_ENABLED', false),
         'connection' => env('COMPANY_LOOKUP_BULK_CONNECTION'),
         'table' => 'company_lookup_records',
+        // Download timeout in seconds; the full Belgian extract is large.
+        'timeout' => (int) env('COMPANY_LOOKUP_BULK_TIMEOUT', 1800),
+        // Where downloads are stored and unpacked; defaults to the system temp directory.
+        'temp_path' => env('COMPANY_LOOKUP_BULK_TEMP_PATH'),
+        // An import that yields fewer rows than this share of the stored ones is refused
+        // (protects against truncated downloads); `company-lookup:import --force` overrides it.
+        'min_ratio' => (float) env('COMPANY_LOOKUP_BULK_MIN_RATIO', 0.9),
     ],
 ];

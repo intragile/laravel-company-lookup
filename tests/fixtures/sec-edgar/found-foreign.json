@@ -1,0 +1,136 @@
+{
+  "cik": "0001467373",
+  "entityType": "operating",
+  "sic": "7389",
+  "sicDescription": "Services-Business Services, NEC",
+  "ownerOrg": "07 Trade & Services",
+  "insiderTransactionForOwnerExists": 1,
+  "insiderTransactionForIssuerExists": 1,
+  "name": "Accenture plc",
+  "tickers": [
+    "ACN"
+  ],
+  "exchanges": [
+    "NYSE"
+  ],
+  "ein": "980627530",
+  "lei": null,
+  "description": "",
+  "website": "",
+  "investorWebsite": "",
+  "category": "Large accelerated filer",
+  "fiscalYearEnd": "0831",
+  "stateOfIncorporation": "L2",
+  "stateOfIncorporationDescription": "Ireland",
+  "addresses": {
+    "mailing": {
+      "street1": "1 GRAND CANAL SQUARE",
+      "street2": "GRAND CANAL HARBOUR",
+      "city": "DUBLIN",
+      "stateOrCountry": "L2",
+      "zipCode": "D2",
+      "stateOrCountryDescription": "Ireland",
+      "isForeignLocation": 0,
+      "foreignStateTerritory": null,
+      "country": null,
+      "countryCode": null
+    },
+    "business": {
+      "street1": "1 GRAND CANAL SQUARE",
+      "street2": "GRAND CANAL HARBOUR",
+      "city": "DUBLIN",
+      "stateOrCountry": "L2",
+      "zipCode": "D2",
+      "stateOrCountryDescription": "Ireland",
+      "isForeignLocation": null,
+      "foreignStateTerritory": null,
+      "country": null,
+      "countryCode": null
+    }
+  },
+  "phone": "353-1-646-2000",
+  "flags": "",
+  "formerNames": [
+    {
+      "name": "Accenture plc",
+      "from": "2009-09-01T04:00:00.000Z",
+      "to": "2026-11-05T05:00:00.000Z"
+    }
+  ],
+  "filings": {
+    "recent": {
+      "accessionNumber": [
+        "0002030841-26-000006",
+        "0001969223-26-001131"
+      ],
+      "filingDate": [
+        "2026-11-05",
+        "2026-11-05"
+      ],
+      "reportDate": [
+        "2026-11-05",
+        ""
+      ],
+      "acceptanceDateTime": [
+        "2026-11-05T21:56:03.000Z",
+        "2026-11-05T21:02:38.000Z"
+      ],
+      "act": [
+        "",
+        "33"
+      ],
+      "form": [
+        "4",
+        "144"
+      ],
+      "fileNumber": [
+        "",
+        "001-34448"
+      ],
+      "filmNumber": [
+        "",
+        "261527051"
+      ],
+      "items": [
+        "",
+        ""
+      ],
+      "core_type": [
+        "4",
+        "144"
+      ],
+      "size": [
+        4848,
+        7565
+      ],
+      "isXBRL": [
+        0,
+        0
+      ],
+      "isInlineXBRL": [
+        0,
+        0
+      ],
+      "isXBRLNumeric": [
+        0,
+        0
+      ],
+      "primaryDocument": [
+        "xslF345X06/wk-form4_1793915761.xml",
+        "xsl144X01/primary_doc.xml"
+      ],
+      "primaryDocDescription": [
+        "FORM 4",
+        ""
+      ]
+    },
+    "files": [
+      {
+        "name": "CIK0001467373-submissions-001.json",
+        "filingCount": 2007,
+        "filingFrom": "2016-03-08",
+        "filingTo": "2023-06-24"
+      }
+    ]
+  }
+}

@@ -52,7 +52,8 @@
         "phpunit/phpunit": "^12.0"
     },
     "suggest": {
-        "ext-zip": "Required by the Estonian bulk dataset import (zip archive).",
+        "ext-pdo_sqlite": "Required by the Belgian bulk dataset import (temporary join index).",
+        "ext-zip": "Required by the Estonian and Belgian bulk dataset imports (zip archives).",
         "intragile/laravel-nav-online-szamla": "Enables the Hungarian NAV taxpayer driver with your own NAV technical user."
     },
     "autoload": {

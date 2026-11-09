@@ -1,0 +1,50 @@
+{
+  "etag": "9f8e7d6c5b4a39281706f5e4d3c2b1a098765432",
+  "items_per_page": 2,
+  "kind": "search#companies",
+  "start_index": 0,
+  "total_results": 2,
+  "page_number": 1,
+  "items": [
+    {
+      "address": {
+        "premises": "Tesco House",
+        "address_line_1": "Shire Park",
+        "address_line_2": "Kestrel Way",
+        "locality": "Welwyn Garden City",
+        "postal_code": "AL7 1GA",
+        "country": "United Kingdom"
+      },
+      "address_snippet": "Tesco House, Shire Park, Kestrel Way, Welwyn Garden City, United Kingdom, AL7 1GA",
+      "company_number": "00445790",
+      "company_status": "active",
+      "company_type": "plc",
+      "date_of_creation": "1947-11-27",
+      "description": "00445790 - Incorporated on 27 November 1947",
+      "description_identifier": ["incorporated-on"],
+      "kind": "searchresults#company",
+      "links": { "self": "/company/00445790" },
+      "matches": { "title": [1, 5], "snippet": [] },
+      "snippet": "",
+      "title": "TESCO PLC"
+    },
+    {
+      "address": {
+        "address_line_1": "1 Example Street",
+        "locality": "Edinburgh",
+        "postal_code": "EH1 1AA",
+        "country": "Scotland"
+      },
+      "address_snippet": "1 Example Street, Edinburgh, EH1 1AA",
+      "company_number": "SC012345",
+      "company_status": "dissolved",
+      "company_type": "ltd",
+      "date_of_cessation": "2020-06-30",
+      "date_of_creation": "1990-03-01",
+      "description": "SC012345 - Dissolved on 30 June 2020",
+      "kind": "searchresults#company",
+      "links": { "self": "/company/SC012345" },
+      "title": "EXAMPLE TRADING LTD"
+    }
+  ]
+}

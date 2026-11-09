@@ -9,3 +9,6 @@
 /phpunit.xml        export-ignore
 /pint.json          export-ignore
 /CHANGELOG.md       export-ignore
+
+# Recorded registry responses must stay byte-for-byte (MTOM boundaries use CRLF).
+/tests/fixtures/**  -text

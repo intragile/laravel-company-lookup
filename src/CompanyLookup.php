@@ -115,15 +115,23 @@ class CompanyLookup
     public function lookup(string $country, string|Identifier $identifier, ?IdentifierType $type = null): LookupOutcome
     {
         $country = strtoupper(trim($country));
+        $guessed = false;
 
         if (is_string($identifier)) {
+            $guessed = $type === null;
             $identifier = new Identifier($type ?? Normalize::guessType($country, $identifier), trim($identifier));
         }
 
-        $drivers = $this->select($country, fn (Capabilities $capabilities): bool => $capabilities->supportsType($identifier->type));
+        // A bare number without a stated type may be a register number or a tax number:
+        // ask the drivers of both kinds and hand each the type it understands.
+        $widen = $guessed && $identifier->type === IdentifierType::Registration;
+        $asTax = new Identifier(IdentifierType::Tax, $identifier->value, $identifier->scheme);
+
+        $drivers = $this->select($country, fn (Capabilities $capabilities): bool => $capabilities->supportsType($identifier->type)
+            || ($widen && $capabilities->supportsType(IdentifierType::Tax)));
 
         return $this->run($drivers, $country, 'lookup', $identifier->type->value.':'.Normalize::compact($identifier->value),
-            fn (Driver $driver): LookupResult => $driver->lookup($country, $identifier));
+            fn (Driver $driver): LookupResult => $driver->lookup($country, $driver->capabilities()->supportsType($identifier->type) ? $identifier : $asTax));
     }
 
     /**

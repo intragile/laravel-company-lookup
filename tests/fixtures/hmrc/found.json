@@ -1,0 +1,12 @@
+{
+  "target": {
+    "name": "Credite Sberger Donal Inc.",
+    "vatNumber": "553557881",
+    "address": {
+      "line1": "131B Barton Hamlet",
+      "postcode": "SW97 5CK",
+      "countryCode": "GB"
+    }
+  },
+  "processingDate": "2019-01-31T12:43:17+00:00"
+}
