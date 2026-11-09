@@ -6,6 +6,13 @@ All notable changes are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [1.0.1] - 2026-11-09
+
+### Fixed
+
+- Installs on fresh Laravel 13 applications, which ship Guzzle 8: the Guzzle constraint is now
+  `^7.9|^8.0`.
+
 ## [1.0.0] - 2026-11-09
 
 ### Added
@@ -29,6 +36,7 @@ All notable changes are recorded here. The format follows
 - `company-lookup:doctor` and `company-lookup:lookup` commands, and `CompanyLookup::fake()` with
   assertions.
 
+[1.0.1]: https://github.com/intragile/laravel-company-lookup/releases/tag/v1.0.1
 [1.0.0]: https://github.com/intragile/laravel-company-lookup/releases/tag/v1.0.0
 
 ---
