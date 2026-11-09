@@ -38,7 +38,7 @@ final class DoctorCommand extends Command
 
             $check = '';
             if ($live && $status === 'ready' && $capabilities->sample !== null) {
-                $country = $capabilities->countries[0] === '*' ? 'DE' : $capabilities->countries[0];
+                $country = $capabilities->sampleCountry();
                 $type = $capabilities->identifierTypes[0] ?? null;
 
                 if ($type !== null) {

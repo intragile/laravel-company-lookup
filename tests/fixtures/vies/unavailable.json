@@ -1,0 +1,10 @@
+{
+  "isValid" : false,
+  "requestDate" : "2026-11-09T15:30:00.000Z",
+  "userError" : "MS_UNAVAILABLE",
+  "name" : "---",
+  "address" : "---",
+  "requestIdentifier" : "",
+  "originalVatNumber" : "100000000",
+  "vatNumber" : "100000000"
+}

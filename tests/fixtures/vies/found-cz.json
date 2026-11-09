@@ -1,0 +1,22 @@
+{
+  "isValid" : true,
+  "requestDate" : "2026-11-09T15:26:03.289Z",
+  "userError" : "VALID",
+  "name" : "ČEZ, a. s.",
+  "address" : "Duhová 1444/2\nPRAHA 4 - MICHLE\n140 00  PRAHA 4",
+  "requestIdentifier" : "",
+  "originalVatNumber" : "45274649",
+  "vatNumber" : "45274649",
+  "viesApproximate" : {
+    "name" : "---",
+    "street" : "---",
+    "postalCode" : "---",
+    "city" : "---",
+    "companyType" : "---",
+    "matchName" : 3,
+    "matchStreet" : 3,
+    "matchPostalCode" : 3,
+    "matchCity" : 3,
+    "matchCompanyType" : 3
+  }
+}

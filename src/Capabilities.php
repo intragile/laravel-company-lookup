@@ -19,6 +19,7 @@ final readonly class Capabilities
      * @param  string|null  $attribution  Licence attribution the data owner requires, if any.
      * @param  string|null  $registryUrl  Public web page of the registry.
      * @param  string|null  $sample  A known identifier that the live self-test can look up.
+     * @param  string|null  $sampleCountry  Country of the sample; defaults to the first listed country.
      */
     public function __construct(
         public string $key,
@@ -31,7 +32,16 @@ final readonly class Capabilities
         public ?string $attribution = null,
         public ?string $registryUrl = null,
         public ?string $sample = null,
+        public ?string $sampleCountry = null,
     ) {}
+
+    /**
+     * The country to use with the sample identifier.
+     */
+    public function sampleCountry(): string
+    {
+        return $this->sampleCountry ?? ($this->countries[0] === '*' ? 'DE' : $this->countries[0]);
+    }
 
     public function supportsCountry(string $country): bool
     {
