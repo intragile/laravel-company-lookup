@@ -12,9 +12,10 @@ updates:
     schedule:
       interval: monthly
     # Only the development tools; the runtime version constraints are maintained by hand.
+    # widen keeps the older majors in "^11.0|^12.0" style constraints, which the matrix still uses.
     allow:
       - dependency-type: development
-    versioning-strategy: increase-if-necessary
+    versioning-strategy: widen
     groups:
       dev-dependencies:
         patterns: ["*"]
