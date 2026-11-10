@@ -2,6 +2,8 @@ name: tests
 on:
   push:
   pull_request:
+  schedule:
+    - cron: "47 4 * * 1"
   workflow_dispatch:
 jobs:
   tests:
@@ -28,3 +30,53 @@ jobs:
       - run: vendor/bin/phpunit
       - run: vendor/bin/phpstan analyse --memory-limit=1G
       - run: vendor/bin/pint --test
+
+  next-versions:
+    # Early warning against the next PHP release and the next Laravel major,
+    # installed with minimum-stability dev. Static analysis and style are left to the jobs
+    # above. A failure here does not fail the run, so check this job's result.
+    # Laravel master has no branch alias, so the matching Testbench branch is named here;
+    # bump both rows when a new PHP or Laravel version ships.
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { php: '8.6', laravel: '13.*', testbench: '*' }
+          - { php: '8.5', laravel: 'dev-master', testbench: '12.x-dev' }
+    name: Next / PHP ${{ matrix.php }} / Laravel ${{ matrix.laravel }}
+    env:
+      LARAVEL: ${{ matrix.laravel }}
+      TESTBENCH: ${{ matrix.testbench }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: none, bcmath, ctype, curl, dom, fileinfo, filter, iconv, json, libxml, mbstring, openssl, pdo, pdo_sqlite, sqlite3, phar, simplexml, tokenizer, xml, xmlwriter, zip
+          coverage: none
+      - name: Retarget composer.json at the upcoming versions
+        run: |
+          php -r '
+            $c = json_decode(file_get_contents("composer.json"), true);
+            foreach (["larastan/larastan", "phpstan/phpstan", "laravel/pint"] as $tool) {
+                unset($c["require-dev"][$tool]);
+            }
+            if (isset($c["require-dev"]["orchestra/testbench"])) {
+                $c["require-dev"]["orchestra/testbench"] = getenv("TESTBENCH") ?: "*";
+            }
+            $laravel = (string) getenv("LARAVEL");
+            foreach (["require", "require-dev"] as $section) {
+                foreach (array_keys($c[$section] ?? []) as $name) {
+                    if ($laravel !== "" && str_starts_with($name, "illuminate/")) {
+                        $c[$section][$name] = $laravel;
+                    }
+                }
+            }
+            $c["minimum-stability"] = "dev";
+            $c["prefer-stable"] = true;
+            file_put_contents("composer.json", json_encode($c, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+          '
+      - run: composer update --prefer-dist --no-interaction --no-progress --ignore-platform-req=php+
+      - run: vendor/bin/phpunit

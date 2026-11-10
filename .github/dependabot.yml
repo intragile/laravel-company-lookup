@@ -1,0 +1,20 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      actions:
+        patterns: ["*"]
+  - package-ecosystem: composer
+    directory: /
+    schedule:
+      interval: monthly
+    # Only the development tools; the runtime version constraints are maintained by hand.
+    allow:
+      - dependency-type: development
+    versioning-strategy: increase-if-necessary
+    groups:
+      dev-dependencies:
+        patterns: ["*"]
