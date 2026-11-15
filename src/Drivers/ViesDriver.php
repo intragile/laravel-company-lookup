@@ -26,7 +26,13 @@ final class ViesDriver extends AbstractHttpDriver
     private const COUNTRIES = ['AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'EE', 'GR', 'ES', 'FI', 'FR', 'HR', 'HU', 'IE', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'XI'];
 
     /** userError values that mean "try again later", not "invalid". */
-    private const RETRYABLE = ['MS_UNAVAILABLE', 'MS_MAX_CONCURRENT_REQ', 'GLOBAL_MAX_CONCURRENT_REQ', 'SERVICE_UNAVAILABLE', 'TIMEOUT'];
+    private const RETRYABLE = ['MS_UNAVAILABLE', 'MS_MAX_CONCURRENT_REQ', 'GLOBAL_MAX_CONCURRENT_REQ', 'SERVICE_UNAVAILABLE', 'SERVER_BUSY', 'TIMEOUT'];
+
+    /** userError values for a request VIES refused: they say nothing about the number. */
+    private const REFUSED = ['VAT_BLOCKED', 'IP_BLOCKED', 'INVALID_REQUESTER_INFO'];
+
+    /** userError values VIES sends with an answer about the number itself. */
+    private const ANSWERED = ['VALID', 'INVALID', 'INVALID_INPUT'];
 
     public function capabilities(): Capabilities
     {
@@ -67,6 +73,15 @@ final class ViesDriver extends AbstractHttpDriver
 
             if (in_array($error, self::RETRYABLE, true)) {
                 return LookupResult::failed(self::KEY, $error === 'MS_UNAVAILABLE' ? FailureReason::Unavailable : FailureReason::RateLimited, true, $error);
+            }
+
+            if (in_array($error, self::REFUSED, true)) {
+                return LookupResult::failed(self::KEY, FailureReason::Rejected, false, $error);
+            }
+
+            // Any other code is one VIES added later: not an answer about the number.
+            if (! in_array($error, self::ANSWERED, true)) {
+                return LookupResult::failed(self::KEY, FailureReason::InvalidResponse, false, $error);
             }
 
             if ($error === 'INVALID_INPUT' || Data::bool($data, 'isValid') !== true) {
