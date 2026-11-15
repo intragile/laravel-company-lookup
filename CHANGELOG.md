@@ -6,6 +6,14 @@ All notable changes are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Fixed
+
+- VIES: a refused request (`VAT_BLOCKED`, `IP_BLOCKED`, `INVALID_REQUESTER_INFO`), `SERVER_BUSY`
+  and any `userError` the driver does not know are failures, not "not found". Before, they
+  reported a valid number as unknown, and that answer was cached as definitive.
+
 ## [1.0.1] - 2026-11-09
 
 ### Fixed

@@ -13,6 +13,7 @@ use IntrAgile\CompanyLookup\Enums\IdentifierType;
 use IntrAgile\CompanyLookup\Identifier;
 use IntrAgile\CompanyLookup\Tests\Fixtures;
 use IntrAgile\CompanyLookup\Tests\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Fixtures recorded from the live VIES REST API on 2026-11-09, except unavailable.json,
@@ -69,6 +70,48 @@ final class ViesDriverTest extends TestCase
         self::assertTrue($result->retryable);
     }
 
+    public function test_server_busy_is_a_retryable_failure(): void
+    {
+        Http::fake(['ec.europa.eu/*' => Http::response(self::answer('SERVER_BUSY'))]);
+
+        $result = $this->driver()->lookup('CZ', Identifier::vat('CZ45274649'));
+
+        self::assertTrue($result->isFailed());
+        self::assertSame(FailureReason::RateLimited, $result->reason);
+        self::assertTrue($result->retryable);
+    }
+
+    #[DataProvider('refusals')]
+    public function test_a_refused_request_is_a_failure_not_an_invalid_number(string $userError): void
+    {
+        Http::fake(['ec.europa.eu/*' => Http::response(self::answer($userError))]);
+
+        $result = $this->driver()->lookup('CZ', Identifier::vat('CZ45274649'));
+
+        self::assertTrue($result->isFailed());
+        self::assertSame(FailureReason::Rejected, $result->reason);
+        self::assertFalse($result->retryable);
+        self::assertSame($userError, $result->message);
+    }
+
+    /**
+     * @return array<string, array{string}>
+     */
+    public static function refusals(): array
+    {
+        return ['VAT_BLOCKED' => ['VAT_BLOCKED'], 'IP_BLOCKED' => ['IP_BLOCKED'], 'INVALID_REQUESTER_INFO' => ['INVALID_REQUESTER_INFO']];
+    }
+
+    public function test_an_unknown_user_error_is_a_failure_not_an_invalid_number(): void
+    {
+        Http::fake(['ec.europa.eu/*' => Http::response(self::answer('SOMETHING_NEW'))]);
+
+        $result = $this->driver()->lookup('CZ', Identifier::vat('CZ45274649'));
+
+        self::assertTrue($result->isFailed());
+        self::assertSame(FailureReason::InvalidResponse, $result->reason);
+    }
+
     public function test_greece_uses_the_el_prefix(): void
     {
         Http::fake(['ec.europa.eu/*' => Http::response(Fixtures::get('vies/invalid-hu.json'))]);
@@ -84,6 +127,16 @@ final class ViesDriverTest extends TestCase
 
         self::assertTrue($this->driver()->lookup('NO', Identifier::vat('NO923609016MVA'))->isNotFound());
         Http::assertNothingSent();
+    }
+
+    /**
+     * The shape of every VIES answer that is not about the number: isValid false, no name or address.
+     *
+     * @return array<string, mixed>
+     */
+    private static function answer(string $userError): array
+    {
+        return ['isValid' => false, 'requestDate' => '2026-11-15T10:00:00.000Z', 'userError' => $userError, 'name' => '---', 'address' => '---', 'requestIdentifier' => '', 'originalVatNumber' => '45274649', 'vatNumber' => '45274649'];
     }
 
     public function test_server_error_is_retryable(): void
